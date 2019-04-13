@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Game</title>
+	<style>
+		canvas{
+			background: "White";
+			display: block;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+<canvas id="canvas" width="500" height="500"></canvas>
+<script type="text/javascript">
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+   
+   var x = 50;
+   var y = 450;
+
+   var dx = 0;
+   var dy = -5;
+   var sides = false;
+   var color = ['#f44242','#f442df','#d442f4','#6542f4','#42d9f4','#42f44b','#b3f442','#f4ce42','#f47142']
+   var color_index = 0; 
+   function draw() {
+    
+	ctx.beginPath();
+	ctx.arc(x,y,20,0,Math.PI*2,false);
+	ctx.fillStyle = color[color_index];
+	ctx.fill();
+	ctx.closePath();
+	x += dx;           
+	y += dy;  
+    if(y == 50) {
+    	sides = true;
+       dx = 5;
+       dy = 0;
+       
+	  }
+
+	  if(x == 450) {
+	  	dx = 0;
+	  	dy = 5;
+	  	 
+	  }
+	  if (y == 450) {
+	  	sides = true;
+	  	dy = 0;
+	  	dx = -5;
+
+	  }
+	  if( y == 450 && x == 50 && sides == true) {
+	  	dx = 0;
+	  	dy = -5;
+	  	sides = false;
+	  	color_index += 1;
+	  }
+	  if (color_index > color.length-1){
+	  	color_index = 0;
+	  }
+    }
+    setInterval(draw, 1)
+</script>
+</body>
+</html>
